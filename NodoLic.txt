@@ -1,0 +1,107 @@
+package nodolic;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author ESCOBAR
+ */
+public class NodoLic {
+
+    Scanner sc = new Scanner(System.in);
+    Scanner br = new Scanner(System.in);
+
+    static class Nodo {
+
+        int id;
+        String MARCA;
+        String TIPO;
+        float PRECIO;
+
+        Nodo sig;
+    }
+    
+    Nodo inicio = null;
+    Nodo fin = null;
+    int i = 1;
+    
+    public void agregar() {
+
+        Nodo temp = new Nodo();
+
+        temp.id=i;        
+        System.out.print("ingrese la marca: ");
+        temp.MARCA = sc.nextLine();
+        System.out.print("ingrese el tipo de licor: ");
+        temp.TIPO = sc.nextLine();
+        System.out.print("Ingrese el precio: ");
+        temp.PRECIO = br.nextFloat();
+
+        if (inicio == null) {
+
+            inicio = temp;
+            inicio.sig = null;
+            fin = temp;
+        } else {
+
+            fin.sig = temp;
+            temp.sig = null;
+            fin = temp;
+            System.out.println("Dato agregado " + fin.id);
+
+        }
+        i++;
+    }
+
+    public void mostrar() {
+
+        Nodo actual = new Nodo();
+        actual = inicio;
+        if (inicio != null) {
+
+            while (actual != null) {
+                System.out.println(" " + "[" + actual.id + "] " + "[" + actual.MARCA + "] " + " [" + actual.TIPO + "]"
+                        + " [" + actual.PRECIO + "]");
+                actual = actual.sig;
+            }
+
+        } else {
+
+            System.out.println("\nla lista esta vacia");
+
+        }
+
+    }
+
+    public static void main(String[] args) {
+
+        Scanner rd = new Scanner(System.in);
+
+        int opt = 0;
+
+        NodoLic n = new NodoLic();
+
+        do {
+
+            System.out.println("\n1 add" + "\n2 show" + "\n3 exit");
+
+            switch (opt = rd.nextInt()) {
+
+                case 1:
+
+                    n.agregar();
+
+                    break;
+
+                case 2:
+
+                    n.mostrar();
+
+                    break;
+
+            }
+
+        } while (opt != 3);
+
+    }
+    }

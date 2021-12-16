@@ -1,0 +1,163 @@
+
+package nodo500;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author ESCOBAR
+ */
+public class Nodo500 {
+
+   Scanner sc = new Scanner(System.in);
+
+    public class Nodo {
+
+        int DATO;
+        Nodo NEXT;
+    }
+    int NODOS =500;
+    Nodo INICIAL = null;
+    Nodo FINAL = null;
+    int r;
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        Nodo500 n = new Nodo500();
+        int opc;
+
+        do {
+            System.out.print("\nMenu."
+                    + "\n 1- Llenar "
+                    + "\n 2- Mostrar"
+                    + "\n 3- Ordenar "
+                    + "\n 4- Eliminar repetidos"
+                    + "\n 5- Agregar faltantes"
+                    + "\n 6- Salir"
+                    + "\nSeleccione la opcion a realizar:");
+
+            switch (opc = sc.nextInt()) {
+                case 1:
+                    n.Llenar();
+                    break;
+                case 2:
+                    n.Mostrar();
+                    break;
+                case 3:
+                    n.Ordenar();
+                    break;
+                case 4:
+                    n.Elimrepet();
+                    break;
+                case 5:
+                    n.Agregarfalt();
+                    break;
+            }
+
+        } while (opc != 6);
+
+    }
+
+    public void Llenar() {
+        int [] comparar =new int [501];
+        if(INICIAL==null){
+            INICIAL = new Nodo();
+            INICIAL.NEXT = null;
+            for (int i = 2; i <= 500; i++) {
+                int Numeros = ((int) (Math.random() * 500 + 0));
+                comparar[i]=Numeros;
+                Nodo temp;
+                temp = new Nodo();
+                temp.DATO = Numeros;
+                temp.NEXT = INICIAL;
+                        
+                INICIAL = temp;
+            }
+        
+        System.out.println("\n"+"Datos agregados"+comparar);
+        }else{
+            System.out.println("\n"+"Seleccione la opcion 5!!!");
+        }
+    }
+
+    public void Mostrar() {
+        Nodo actual = new Nodo();
+        actual = INICIAL;
+        if (INICIAL != null) {
+            while (actual != null) {
+                for (int i = 1; i <= NODOS; i++) {
+                System.out.println("Nodo "+i+" [ " + actual.DATO + " ] ");
+                actual = actual.NEXT;
+                }
+            }
+        }
+    }
+
+    public void Ordenar() {
+        int  au;
+        if (INICIAL != null) {
+            System.out.println("\n"+"Datos ordenados ");
+            for (int cont = 1; cont <= 500; cont++) {
+                Nodo anterior = new Nodo();
+                anterior = INICIAL;
+                Nodo actual = new Nodo();
+                actual = anterior.NEXT;
+                for (int i = 0; i <= 500 - 1; i++) {
+                    for (int j = 0; j <= 500 - 1; j++) {
+                        while (anterior.NEXT != null) {
+                            if (anterior.DATO == actual.DATO) {
+                                au = anterior.DATO;
+                                anterior.DATO = actual.DATO;
+                                actual.DATO = au;
+                            }
+                            anterior = actual;
+                            actual = anterior.NEXT;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void Elimrepet() {
+        int  au;
+        if (INICIAL != null) {
+            for (int cont = 1; cont <= 500; cont++) {
+                Nodo anterior = new Nodo();
+                anterior = INICIAL;
+                Nodo actual = new Nodo();
+                actual = anterior.NEXT;
+                for (int i = 0; i <= 500 - 1; i++) {
+                    for (int j = 0; j <= 500 - 1; j++) {
+                        while (anterior.NEXT != null) {
+                            if (anterior.DATO == actual.DATO) {
+                                int contador=1;
+                                contador++;
+                                System.out.println(contador);
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            System.out.print("\n" + "La lista esta vacia!!!");
+        }
+        System.out.println("");
+       
+    }
+
+    public void Agregarfalt() {
+        for (int i = NODOS; i <= 499; i++) {
+            int Numeros2 = ((int) (Math.random() * 9 + 1));
+            Nodo temp;
+            temp = new Nodo();
+            
+            temp.DATO = Numeros2;
+            temp.NEXT = INICIAL;
+            
+            INICIAL = temp;
+            NODOS ++;
+        }
+        System.out.print("\n" + "La lista esta llena!!!");
+    }
+}
